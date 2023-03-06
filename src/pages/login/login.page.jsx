@@ -32,7 +32,7 @@ const LoginPage = () => {
 
     //<input name="x" value="y" onChange=(event) => handleChange(event)>
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         setUser((prevState => {
             //e.g: prevState ({user: x, pass: x}) + newKeyValue ({user: xy}) => ({user: xy, pass: x})
@@ -44,37 +44,37 @@ const LoginPage = () => {
     };
 
     const handleLogin = (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      setSubmitted(true);
+        setSubmitted(true);
 
-      if (!user.username || !user.password) {
-          return;
-      }
+        if (!user.username || !user.password) {
+            return;
+        }
 
-      setLoading(true);
+        setLoading(true);
 
-      AuthenticationService.login(user).then(response => {
-          //set user in session.
-          dispatch(setCurrentUser(response.data));
-          navigate('/profile');
-      }).catch(error => {
-         console.log(error);
-         setErrorMessage('username or password is not valid.');
-         setLoading(false);
-      });
+        AuthenticationService.login(user).then(response => {
+            //set user in session.
+            dispatch(setCurrentUser(response.data));
+            navigate('/profile');
+        }).catch(error => {
+            console.log(error);
+            setErrorMessage('username or password is not valid.');
+            setLoading(false);
+        });
     };
 
     return (
         <div className="container mt-5">
             <div className="card ms-auto me-auto p-3 shadow-lg custom-card">
 
-                <FontAwesomeIcon icon={faUserCircle} className="ms-auto me-auto user-icon"/>
+                <FontAwesomeIcon icon={faUserCircle} className="ms-auto me-auto user-icon" />
 
                 {errorMessage &&
-                <div className="alert alert-danger">
-                    {errorMessage}
-                </div>
+                    <div className="alert alert-danger">
+                        {errorMessage}
+                    </div>
                 }
 
                 <form
@@ -121,7 +121,7 @@ const LoginPage = () => {
 
                 </form>
 
-                <Link to="/register" className="btn btn-link" style={{color: 'darkgray'}}>
+                <Link to="/register" className="btn btn-link" style={{ color: 'darkgray' }}>
                     Create New Account!
                 </Link>
 
@@ -130,4 +130,4 @@ const LoginPage = () => {
     );
 };
 
-export {LoginPage};
+export { LoginPage };

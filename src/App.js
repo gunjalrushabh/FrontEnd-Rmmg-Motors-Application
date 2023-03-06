@@ -11,6 +11,8 @@ import { ProfilePage } from './pages/profile/profile.pages';
 import { AdminPage } from './pages/admin/admin.pages';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { HomePage } from './pages/home/home.pages';
+import { AuthGuard } from './guards/auth.guard';
+import { Role } from './models/role';
 
 
 function App() {
@@ -23,8 +25,27 @@ function App() {
       <Route path="/home" element={<HomePage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/register" element={<RegisterPage/>}/>
-      <Route path="/profile" element={<ProfilePage/>}/>
-      <Route path="/admin" element={<AdminPage/>}/>
+
+
+      <Route path="/profile" element={
+      
+      <AuthGuard roles = {[Role.ADMIN,Role.USER]}>
+      <ProfilePage/>
+      </AuthGuard>
+      
+      }/>
+      
+      
+      <Route path="/admin" element={
+      
+      <AuthGuard roles = {[Role.ADMIN]}>
+      <AdminPage/>
+      </AuthGuard>
+      
+      }/>
+     
+     
+     
       <Route path="*" element={<NotFoundPage/>}/>
       <Route path="/404" element={<NotFoundPage/>}/>
       <Route path="/401" element={<UnauthorizedPage/>}/>
